@@ -1,0 +1,49 @@
+document: modulemd
+version: 2
+data:
+    summary: PKI Dependencies
+    description: A module for PKI dependencies.
+    license:
+        module:
+          - MIT
+    dependencies:
+      - buildrequires:
+            platform: [-f28, -f29]
+        requires:
+            platform: [-f28, -f29]
+    references:
+        community: http://www.dogtagpki.org
+        documentation: http://www.dogtagpki.org
+        tracker: https://pagure.io/dogtagpki/issues
+    filter:
+        rpms:
+            # - codemodel
+            # - codemodel-javadoc
+            # - import-properties-plugin
+            # - istack-commons
+            # - istack-commons-buildtools
+            # - istack-commons-javadoc
+            # - istack-commons-maven-plugin
+            # - istack-commons-runtime
+            # - istack-commons-test
+            # - istack-commons-tools
+            - fasterxml-oss-parent
+            - jcl-over-slf4j
+            - jul-to-slf4j
+            - log4j-over-slf4j
+            - slf4j-ext
+            - slf4j-javadoc
+            - slf4j-jcl
+            - slf4j-log4j12
+            - slf4j-manual
+            - slf4j-sources
+            - xalan-j2-demo
+            - xalan-j2-javadoc
+            - xalan-j2-manual
+            - xalan-j2-xsltc
+
+    modules:
+        javapackages-tools:
+            rationale: Java packaging tools
+            #repository: https://src.fedoraproject.org/modules/javapackages-tools.git
+            ref: 201801
