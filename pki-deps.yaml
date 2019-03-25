@@ -9,6 +9,7 @@ data:
     dependencies:
       - buildrequires:
             platform: [-f28, -f29]
+            javapackages-tools: [201801]
         requires:
             platform: [-f28, -f29]
     references:
@@ -42,62 +43,93 @@ data:
             - xalan-j2-manual
             - xalan-j2-xsltc
 
-    buildopts:
-        rpms:
-            macros: |
-                %_with_jp_minimal 1
-                %_with_xmvn_javadoc 1
-                %_without_asciidoc 1
-                %_without_avalon 1
-                %_without_bouncycastle 1
-                %_without_cython 1
-                %_without_dafsa 1
-                %_without_desktop 1
-                %_without_dom4j 1
-                %_without_doxygen 1
-                %_without_dtd 1
-                %_without_eclipse 1
-                %_without_ehcache 1
-                %_without_emacs 1
-                %_without_equinox 1
-                %_without_fop 1
-                %_without_ftp 1
-                %_without_gradle 1
-                %_without_groovy 1
-                %_without_hadoop 1
-                %_without_hsqldb 1
-                %_without_itext 1
-                %_without_jackson 1
-                %_without_jmh 1
-                %_without_jna 1
-                %_without_jpa 1
-                %_without_logback 1
-                %_without_markdown 1
-                %_without_memcached 1
-                %_without_memoryfilesystem 1
-                %_without_obr 1
-                %_without_python 1
-                %_without_reporting 1
-                %_without_scm 1
-                %_without_snakeyaml 1
-                %_without_snappy 1
-                %_without_spring 1
-                %_without_ssh 1
-                %_without_testlib 1
-                %_without_vfs 1
-
     components:
         rpms:
-
-            fasterxml-oss-parent:
-                rationale: FasterXML parent pom
-                    BuildRequired by jackson-parent.
+            pkgconf:
                 ref: master
+                rationale: Package compiler and linker metadata toolkit 
+            glassfish-jaxb-api:
+                # NOTE: `javapackages` branch is dead. No longer built
+                # in `javapackages-tools` module.
+                ref: master
+                rationale: Java Architecture for XML Binding                
+                buildorder: 1
+            jboss-annotations-1.2-api:
+                ref: master
+                rationale: Common Annotations 1.2 API
+                buildorder: 1
+            jboss-jaxrs-2.0-api:
+                ref: master
+                rationale: JAX-RS 2.0 - The Java API for RESTful Web Services
+                buildorder: 1
+            jboss-logging:
+                ref: master
+                rationale: The JBoss Logging Framework
+                buildorder: 1
+            fasterxml-oss-parent:
+                ref: master
+                rationale: FasterXML parent pom. BuildRequired by jackson-parent.
                 buildorder: 1
             tomcat:
-                rationale: Apache Tomcat
                 ref: master
-                buildorder: 2
+                rationale: Apache Tomcat
+                buildorder: 1
+            apache-commons-cli:
+                ref: javapackages	
+                rationale: Command Line Interface Library for Java
+                buildorder: 1
+            apache-commons-codec:	
+                ref: javapackages
+                rationale: Implementations of common encoders and decoders
+                buildorder: 1
+            apache-commons-io:
+                ref: javapackages
+                rationale: Utilities to assist with developing IO functionality
+                buildorder: 1
+            apache-commons-lang:
+                ref: javapackages
+                rationale: Provides a host of helper utilities for the java.lang API
+                buildorder: 1
+            apache-commons-logging:
+                ref: javapackages
+                rationale: Apache Commons Logging
+                buildorder: 1
+            jakarta-commons-httpclient:	
+                ref: javapackages	
+                rationale: Jakarta Commons HTTPClient implements the client side of HTTP standards
+                buildorder: 1
+            slf4j:	
+                ref: javapackages
+                rationale: Simple Logging Facade for Java
+                buildorder: 1
+            javassist:	
+                ref: javapackages
+                rationale: The Java Programming Assistant provides simple Java bytecode manipulation
+                buildorder: 1
+            javapackages-tools:
+                ref: javapackages
+                rationale: Macros and scripts for Java packaging support
+                buildorder: 1
+            velocity:
+                ref: javapackages
+                rationale: Java-based template engine
+                buildorder: 1
+            xalan-j2:
+                ref: javapackages
+                rationale: Java XSLT processor
+                buildorder: 1
+            xerces-j2:
+                ref: javapackages
+                rationale: Java XML parser
+                buildorder: 1
+            xml-commons-apis:
+                ref: javapackages
+                rationale: APIs for DOM, SAX, and JAXP
+                buildorder: 1
+            xml-commons-resolver:	
+                ref: javapackages	
+                rationale: Resolver subproject of xml-commons
+                buildorder: 1
             jackson-parent:
                 rationale: Jackson Parent POM packages
                     BuildRequires fasterxml-oss-parent.
@@ -119,10 +151,6 @@ data:
                 rationale: Jackson Data-binding packages
                 ref: master
                 buildorder: 7
-            #jackson-module-jaxb-annotations: #DEAD -- replaced by jackson-modules-base
-            #    rationale: Jackson JAXB Annotations packages
-            #    ref: master
-            #    buildorder: 8
             jackson-modules-base:
                 rationale: Jackson modules Base
                 ref: master
@@ -136,8 +164,3 @@ data:
                 ref: master
                 buildorder: 10
 
-    modules:
-        javapackages-tools:
-            rationale: Java packaging tools
-            #repository: https://src.fedoraproject.org/modules/javapackages-tools.git
-            ref: 201801
